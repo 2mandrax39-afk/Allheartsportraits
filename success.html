@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tak for din bestilling – AllHeartsPortraits</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .success-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .success-box {
+      max-width: 480px;
+    }
+    .success-box img {
+      width: 90px;
+      margin: 0 auto 1.5rem;
+    }
+    .success-box h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+    .success-box p {
+      color: #5c5c5c;
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+    .success-box .email-note {
+      background: #f5f3f0;
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.92rem;
+      margin: 1.5rem 0;
+    }
+    .success-box .btn {
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="success-page">
+    <div class="success-box">
+      <img src="logo.webp" alt="AllHeartsPortraits">
+      <h1>Tak for din bestilling</h1>
+      <p>Din betaling er modtaget.</p>
+      <p>Jeg pakker dit værk med omhu og kontakter dig snart angående forsendelse.</p>
+      <div class="email-note" id="email-note">
+        Du modtager en ordrebekræftelse på e-mail om et øjeblik.
+      </div>
+      <p id="order-info" style="font-size: 0.9rem; color: #888;"></p>
+      <a href="/" class="btn btn-primary">Tilbage til galleriet</a>
+    </div>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id');
+    if (sessionId) {
+      fetch('/session-status?session_id=' + sessionId)
+        .then(r => r.json())
+        .then(data => {
+          if (data.customer_email) {
+            document.getElementById('order-info').textContent =
+              'Bekræftelse sendt til ' + data.customer_email;
+            document.getElementById('email-note').textContent =
+              'En ordrebekræftelse er sendt til ' + data.customer_email + '.';
+          }
+        })
+        .catch(() => {});
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AllHeartsPortraits – Portrætkunst med hjerte</title>
+  <meta name="description" content="AllHeartsPortraits – Unikke portrætter skabt med kærlighed og følelse. Original kunst og limited edition prints.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <img src="logo.webp" alt="AllHeartsPortraits" class="logo-img">
+        <span class="logo-text">AllHeartsPortraits</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#galleri">Galleri</a></li>
+        <li><a href="#om">Om</a></li>
+        <li><a href="#bestil">Bestil portræt</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+        <li><a href="#kurv" class="cart-btn">Kurv (<span id="cart-count">0</span>)</a></li>
+      </ul>
+      <button class="menu-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-content">
+      <img src="logo.webp" alt="" class="hero-logo">
+      <p class="hero-subtitle">Portrætkunst med hjerte</p>
+      <h1>AllHeartsPortraits</h1>
+      <p class="hero-text">Hvert portræt fortæller en historie. Jeg skaber unikke, følsomme portrætter der fanger sjælen – både som originale værker og limited edition prints.</p>
+      <div class="hero-buttons">
+        <a href="#galleri" class="btn btn-primary">Se galleriet</a>
+        <a href="#bestil" class="btn btn-outline">Bestil et portræt</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Galleri / Shop -->
+  <section id="galleri" class="gallery-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Galleri</h2>
+        <p>Udvalgte portrætter – klik for detaljer og køb</p>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">Alle</button>
+        <button class="filter-btn" data-filter="original">Originaler</button>
+        <button class="filter-btn" data-filter="print">Prints</button>
+        <button class="filter-btn" data-filter="commission">Bestillingsværker</button>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Product cards injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Om kunstneren -->
+  <section id="om" class="about-section">
+    <div class="container about-grid">
+      <div class="about-image">
+        <img src="logo.webp" alt="AllHeartsPortraits" class="about-logo">
+      </div>
+      <div class="about-content">
+        <h2>Om AllHeartsPortraits</h2>
+        <p class="lead">Jeg skaber portrætter der kommer fra hjertet.</p>
+        <p>Hvert ansigt bærer en historie, en følelse, en stille styrke. Gennem mine værker forsøger jeg at fange det, der ligger bag blikket – den indre verden, den stille skønhed og den menneskelige sårbarhed.</p>
+        <p>Jeg arbejder primært med traditionelle teknikker i sort/hvid og bløde toner, men laver også farvede portrætter efter ønske. Alle originale værker leveres med certifikat, og prints produceres i begrænset oplag på museumskvalitetspapir.</p>
+        <a href="#bestil" class="btn btn-outline">Bestil dit eget portræt</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bestil portræt -->
+  <section id="bestil" class="commission-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Bestil et personligt portræt</h2>
+        <p>Få et unikt portræt skabt specielt til dig eller som gave</p>
+      </div>
+      <div class="commission-grid">
+        <div class="commission-card">
+          <div class="commission-number">01</div>
+          <h3>Send foto</h3>
+          <p>Send et klart foto af den person, du ønsker portrætteret. Gerne flere vinkler.</p>
+        </div>
+        <div class="commission-card">
+          <div class="commission-number">02</div>
+          <h3>Vi aftaler stilen</h3>
+          <p>Sort/hvid, sepia, farve, størrelse og teknik. Vi finder den rette udtryk sammen.</p>
+        </div>
+        <div class="commission-card">
+          <div class="commission-number">03</div>
+          <h3>Skabelsen</h3>
+          <p>Jeg arbejder på dit portræt med omhu. Du får opdateringer undervejs.</p>
+        </div>
+        <div class="commission-card">
+          <div class="commission-number">04</div>
+          <h3>Levering</h3>
+          <p>Dit unikke værk sendes sikkert pakket med certifikat og kærlighed.</p>
+        </div>
+      </div>
+      <div class="commission-cta">
+        <a href="#kontakt" class="btn btn-primary">Start din bestilling</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontakt -->
+  <section id="kontakt" class="contact-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Kontakt</h2>
+        <p>Har du spørgsmål, eller vil du bestille et portræt?</p>
+      </div>
+      <form class="contact-form" id="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Navn</label>
+            <input type="text" id="name" name="name" required placeholder="Dit navn">
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required placeholder="din@email.dk">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject">Emne</label>
+          <select id="subject" name="subject">
+            <option value="bestilling">Bestilling af portræt</option>
+            <option value="spørgsmål">Spørgsmål til et værk</option>
+            <option value="andet">Andet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Besked</label>
+          <textarea id="message" name="message" rows="5" required placeholder="Fortæl mig mere om dit ønske..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send besked</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Cart Modal -->
+  <div class="cart-modal" id="cart-modal">
+    <div class="cart-content">
+      <div class="cart-header">
+        <h3>Din kurv</h3>
+        <button class="close-cart" id="close-cart">&times;</button>
+      </div>
+      <div class="cart-items" id="cart-items">
+        <p class="empty-cart">Kurven er tom</p>
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total:</span>
+          <strong id="cart-total">0 kr.</strong>
+        </div>
+        <div class="payment-buttons">
+          <button class="btn btn-primary" id="checkout-stripe" disabled>
+            Betal med kort (Stripe)
+          </button>
+          <button class="btn btn-mobilepay" id="checkout-mobilepay" disabled>
+            MobilePay
+          </button>
+        </div>
+        <p class="cart-note">Sikker betaling via Stripe. MobilePay kræver opsætning – se README.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Modal -->
+  <div class="product-modal" id="product-modal">
+    <div class="product-modal-content">
+      <button class="close-modal" id="close-modal">&times;</button>
+      <div class="product-modal-body" id="product-modal-body">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="logo.webp" alt="AllHeartsPortraits" class="footer-logo">
+        <p>Portrætkunst med hjerte</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#galleri">Galleri</a></li>
+          <li><a href="#om">Om</a></li>
+          <li><a href="#bestil">Bestil portræt</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Følg med</h4>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="Facebook">Facebook</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 AllHeartsPortraits. Alle rettigheder forbeholdes.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
