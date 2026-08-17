@@ -273,7 +273,7 @@ cartModal.addEventListener("click", (e) => {
 
 // ===== Stripe Checkout =====
 // Sæt din Publishable Key her (eller i config)
-const STRIPE_PUBLISHABLE_KEY = "pk_test_REPLACE_WITH_YOUR_KEY"; // <-- skift denne
+const STRIPE_PUBLISHABLE_KEY = "pk_test_51PeG4XJ7qSQEPxNTgRFaF59u5jjNHtBV4a1WleV4vIMClulVxyHo6cNTJLkG4CSKql6B1Uss0raDhyxZWYhFGBGS00NaaYLJFc "; // <-- skift denne
 const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
 
 async function startStripeCheckout() {
