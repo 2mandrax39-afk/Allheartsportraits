@@ -1,92 +1,52 @@
-// ===== Sample products for AllHeartsPortraits =====
+// ===== Products – AllHeartsPortraits =====
 const products = [
   {
     id: 1,
-    title: "Serenity",
+    title: "Deer in the Morning Light",
     category: "original",
-    price: 4200,
-    description: "Et stille portræt i sort/hvid. Øjnene er lukkede, og der er en dyb indre ro. Originalt værk på høj kvalitetspapir.",
-    size: "40 × 50 cm",
+    price: 150,
+    description: "Kultegning af en hjort der drikker i det stille morgenlys. Blød stemning og fine detaljer i skovlandskabet.",
+    size: "A4",
     year: 2025,
-    medium: "Kul & pastel på papir",
-    badge: "Original"
+    medium: "Kul på papir",
+    badge: "Original",
+    image: "images/deer.jpg"
   },
   {
     id: 2,
-    title: "Quiet Strength",
+    title: "Beauty",
     category: "original",
-    price: 4800,
-    description: "Portræt af en kvinde i profil. Bløde toner og stærke konturer. Et værk der taler om stille styrke og værdighed.",
-    size: "50 × 70 cm",
+    price: 150,
+    description: "Portræt i kul med lukkede øjne og blød lys. Et stille og følsomt udtryk.",
+    size: "A4",
     year: 2025,
     medium: "Kul på papir",
-    badge: "Original"
+    badge: "Original",
+    image: "images/beauty.jpg"
   },
   {
     id: 3,
-    title: "Soft Gaze (Print)",
-    category: "print",
-    price: 750,
-    description: "Limited edition giclée-print. Blødt lys og et indadvendt blik. Nummereret og signeret, kun 30 eksemplarer.",
-    size: "30 × 40 cm",
+    title: "Serenity",
+    category: "original",
+    price: 150,
+    description: "Landskab i kul: sø, skov og sol gennem tåge. En rolig og meditativ stemning.",
+    size: "A4",
     year: 2025,
-    medium: "Giclée print",
-    badge: "Print"
+    medium: "Kul på papir",
+    badge: "Original",
+    image: "images/serenity.jpg"
   },
   {
     id: 4,
-    title: "Profile Study I",
-    category: "print",
-    price: 650,
-    description: "Klassisk profilstudie. Elegant og minimalistisk. Perfekt til det moderne hjem. Signeret print.",
-    size: "A3",
-    year: 2024,
-    medium: "Giclée print",
-    badge: "Print"
-  },
-  {
-    id: 5,
-    title: "Heart’s Whisper",
+    title: "Dancer",
     category: "original",
-    price: 5500,
-    description: "Større originalt portræt med fokus på følelse og tekstur. Arbejdet med lag af kul og hvid pastel.",
-    size: "60 × 80 cm",
+    price: 150,
+    description: "Dansende figur i kul. Bevægelse, kjole og energi fanget i et enkelt, ekspressivt strejf.",
+    size: "A4",
     year: 2025,
-    medium: "Kul & hvid pastel",
-    badge: "Original"
-  },
-  {
-    id: 6,
-    title: "Gentle Soul (Edition)",
-    category: "print",
-    price: 890,
-    description: "Begrænset edition af 25. Et ømt og intimt portræt. Printet på Hahnemühle museumskvalitetspapir.",
-    size: "40 × 50 cm",
-    year: 2025,
-    medium: "Giclée print",
-    badge: "Print"
-  },
-  {
-    id: 7,
-    title: "Commission Example – Portrait",
-    category: "commission",
-    price: 3800,
-    description: "Eksempel på bestilt portræt. Pris afhænger af størrelse og teknik. Kontakt mig for personlig bestilling.",
-    size: "Efter aftale",
-    year: 2025,
-    medium: "Kul / pastel / mix",
-    badge: "Bestilling"
-  },
-  {
-    id: 8,
-    title: "Timeless",
-    category: "original",
-    price: 3900,
-    description: "Klassisk busteportræt i sort/hvid. Inspireret af klassiske skitser, men med moderne følelse.",
-    size: "35 × 45 cm",
-    year: 2024,
     medium: "Kul på papir",
-    badge: "Original"
+    badge: "Original",
+    image: "images/dancer.jpg"
   }
 ];
 
@@ -118,7 +78,7 @@ function renderGallery() {
   galleryGrid.innerHTML = filtered.map(product => `
     <article class="product-card" data-id="${product.id}">
       <div class="product-image">
-        <div class="placeholder">${product.title}</div>
+        <img src="${product.image}" alt="${product.title}" loading="lazy">
         ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ""}
       </div>
       <div class="product-info">
@@ -167,7 +127,7 @@ function openProductModal(id) {
 
   productModalBody.innerHTML = `
     <div class="modal-image">
-      ${product.title}
+      <img src="${product.image}" alt="${product.title}">
     </div>
     <div class="modal-details">
       <p class="modal-category">${formatCategory(product.category)}</p>
@@ -236,7 +196,9 @@ function updateCartUI() {
   } else {
     cartItems.innerHTML = cart.map(item => `
       <div class="cart-item">
-        <div class="cart-item-image">${item.title.split(" ")[0]}</div>
+        <div class="cart-item-image">
+          <img src="${item.image}" alt="${item.title}">
+        </div>
         <div class="cart-item-info">
           <p class="cart-item-title">${item.title}</p>
           <p class="cart-item-price">${formatPrice(item.price)} × ${item.qty}</p>
@@ -272,9 +234,9 @@ cartModal.addEventListener("click", (e) => {
 });
 
 // ===== Stripe Checkout =====
-// Sæt din Publishable Key her (eller i config)
-const STRIPE_PUBLISHABLE_KEY = "pk_test_51PeG4XJ7qSQEPxNTgRFaF59u5jjNHtBV4a1WleV4vIMClulVxyHo6cNTJLkG4CSKql6B1Uss0raDhyxZWYhFGBGS00NaaYLJFc "; // <-- skift denne
-const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+// Behold din Publishable Key (allerede sat på GitHub)
+const STRIPE_PUBLISHABLE_KEY = "pk_test_51PeG4XJ7qSQEPxNTgRFaF59u5jjNHtBV4a1WleV4vIMClulVxyHo6cNTJLkG4CSKql6B1Uss0raDhyxZWYhFGBGS00NaaYLJFc";
+const stripe = Stripe(STRIPE_PUBLISHABLE_KEY.trim());
 
 async function startStripeCheckout() {
   if (cart.length === 0) return;
@@ -283,11 +245,10 @@ async function startStripeCheckout() {
   checkoutStripeBtn.textContent = "Sender dig til betaling...";
 
   try {
-    // Priser skal være i øre for Stripe (1 kr = 100 øre)
     const items = cart.map(item => ({
       name: item.title,
       description: item.medium + " · " + item.size,
-      price: Math.round(item.price * 100), // kr → øre
+      price: Math.round(item.price * 100),
       quantity: item.qty
     }));
 
@@ -303,11 +264,9 @@ async function startStripeCheckout() {
       throw new Error(data.error);
     }
 
-    // Redirect til Stripe Checkout
     if (data.url) {
       window.location.href = data.url;
     } else {
-      // Fallback hvis kun session id returneres
       const result = await stripe.redirectToCheckout({ sessionId: data.id });
       if (result.error) throw new Error(result.error.message);
     }
@@ -322,8 +281,6 @@ async function startStripeCheckout() {
 checkoutStripeBtn.addEventListener("click", startStripeCheckout);
 
 // ===== MobilePay =====
-// MobilePay/Vipps kræver en erhvervsaftale + backend-integration.
-// Indtil det er sat op, sender vi brugeren til kontaktformularen.
 checkoutMobilepayBtn.addEventListener("click", () => {
   cartModal.classList.remove("open");
   document.body.style.overflow = "";
