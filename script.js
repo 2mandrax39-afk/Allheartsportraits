@@ -10,7 +10,7 @@ const products = [
     year: 2025,
     medium: "Kul på papir",
     badge: "Original",
-    image: "images/deer.jpg"
+    image: "deer.jpg"
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const products = [
     year: 2025,
     medium: "Kul på papir",
     badge: "Original",
-    image: "images/beauty.jpg"
+    image: "beauty.jpg"
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ const products = [
     year: 2025,
     medium: "Kul på papir",
     badge: "Original",
-    image: "images/serenity.jpg"
+    image: "serenity.jpg"
   },
   {
     id: 4,
@@ -46,7 +46,7 @@ const products = [
     year: 2025,
     medium: "Kul på papir",
     badge: "Original",
-    image: "images/dancer.jpg"
+    image: "dancer.jpg"
   }
 ];
 
