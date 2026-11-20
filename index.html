@@ -1,225 +1,637 @@
+
 <!DOCTYPE html>
-<html lang="da">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AllHeartsPortraits – Portrætkunst med hjerte</title>
-  <meta name="description" content="AllHeartsPortraits – Unikke portrætter skabt med kærlighed og følelse. Original kunst og limited edition prints.">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <script src="https://js.stripe.com/v3/"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Hearts Portraits</title>
+<meta name="description" content="Digital art, original paintings, portraits and videos by All Hearts Portraits.">
+
+<style>
+:root {
+  --black:#0A0A0A;
+  --gold:#D4AF37;
+  --darkgold:#AA892A;
+  --lightgold:#F5E6A3;
+  --white:#f5f5f5;
+}
+
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  font-family:Georgia,'Times New Roman',serif;
+  background:var(--black);
+  color:var(--white);
+}
+
+header {
+  text-align:center;
+  padding:30px 15px;
+  background:#000;
+  border-bottom:1px solid var(--gold);
+}
+
+.logo {
+  max-width:220px;
+  width:80%;
+  height:auto;
+  margin-bottom:15px;
+}
+
+header h1 {
+  color:var(--gold);
+  letter-spacing:4px;
+  font-size:30px;
+  margin:5px 0;
+}
+
+header p {
+  color:var(--lightgold);
+  font-style:italic;
+}
+
+nav {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
+  background:#111;
+  padding:12px 8px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  border-bottom:1px solid #5d4b1b;
+}
+
+nav button {
+  background:none;
+  border:1px solid transparent;
+  color:var(--gold);
+  text-decoration:none;
+  padding:9px 12px;
+  font-family:inherit;
+  font-size:14px;
+  cursor:pointer;
+}
+
+nav button:hover,
+nav button.active {
+  border-color:var(--gold);
+  background:#1b1608;
+  color:var(--lightgold);
+}
+
+.page {
+  display:none;
+  padding:45px 18px;
+  max-width:1200px;
+  margin:auto;
+  min-height:55vh;
+}
+
+.page.active {
+  display:block;
+}
+
+.section-title {
+  color:var(--gold);
+  text-align:center;
+  font-size:30px;
+  margin-bottom:30px;
+  letter-spacing:2px;
+}
+
+.intro {
+  text-align:center;
+  max-width:850px;
+  margin:auto;
+  line-height:1.8;
+  color:#ddd;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:22px;
+}
+
+.card {
+  background:#141414;
+  border:1px solid #5d4b1b;
+  border-radius:5px;
+  overflow:hidden;
+  text-align:center;
+  transition:.3s;
+}
+
+.card:hover {
+  border-color:var(--gold);
+  transform:translateY(-3px);
+}
+
+.card img {
+  width:100%;
+  height:280px;
+  object-fit:cover;
+  display:block;
+}
+
+.card-content {
+  padding:18px;
+}
+
+.card h3 {
+  color:var(--gold);
+  margin-top:0;
+}
+
+.card p {
+  line-height:1.6;
+  color:#ddd;
+}
+
+.price {
+  color:var(--lightgold);
+  font-size:20px;
+  margin:12px 0;
+}
+
+.button {
+  display:inline-block;
+  background:var(--gold);
+  color:#000;
+  text-decoration:none;
+  padding:12px 20px;
+  margin:8px 0;
+  border:none;
+  border-radius:3px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.button:hover {
+  background:var(--lightgold);
+}
+
+.video-card video {
+  width:100%;
+  height:260px;
+  background:black;
+  object-fit:contain;
+}
+
+.painting-image {
+  height:320px !important;
+  object-fit:contain !important;
+  background:#080808;
+}
+
+.about-box {
+  max-width:800px;
+  margin:auto;
+  text-align:center;
+  line-height:1.9;
+  color:#ddd;
+  border:1px solid #5d4b1b;
+  padding:30px;
+  background:#111;
+}
+
+footer {
+  text-align:center;
+  padding:35px 15px;
+  border-top:1px solid var(--gold);
+  background:#000;
+  color:var(--lightgold);
+}
+
+footer a {
+  color:var(--gold);
+}
+
+.home-links {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin-top:30px;
+}
+
+.home-links button,
+.home-links a {
+  min-width:180px;
+}
+
+@media(max-width:600px) {
+  header h1 {
+    font-size:23px;
+    letter-spacing:2px;
+  }
+
+  nav {
+    gap:2px;
+  }
+
+  nav button {
+    padding:8px 6px;
+    font-size:12px;
+  }
+
+  .page {
+    padding:30px 12px;
+  }
+
+  .section-title {
+    font-size:24px;
+  }
+}
+</style>
 </head>
+
 <body>
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="#" class="logo">
-        <img src="logo.webp" alt="AllHeartsPortraits" class="logo-img">
-        <span class="logo-text">AllHeartsPortraits</span>
+
+<header>
+  <img src="logo.webp" alt="All Hearts Portraits Logo" class="logo">
+  <h1>ALL HEARTS PORTRAITS</h1>
+  <p>Art created with heart and soul</p>
+</header>
+
+<nav>
+  <button class="nav-btn active" data-page="home">Home</button>
+  <button class="nav-btn" data-page="digital">Digital Downloads</button>
+  <button class="nav-btn" data-page="videos">Videos</button>
+  <button class="nav-btn" data-page="paintings">Original Paintings</button>
+  <button class="nav-btn" data-page="about">About</button>
+  <button class="nav-btn" data-page="contact">Contact</button>
+</nav>
+
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+  <h2 class="section-title">Welcome</h2>
+
+  <div class="intro">
+    <p>
+      Welcome to All Hearts Portraits. Discover original artwork,
+      digital creations, portraits and paintings.
+    </p>
+    <p>
+      Explore the collection and find a piece of art that speaks to you.
+    </p>
+
+    <div class="home-links">
+
+      <a class="button"
+         href="https://new-tracer-gold.2mandrax39.workers.dev"
+         target="_blank"
+         rel="noopener">
+         🎨 Open Tracer Studio
       </a>
-      <ul class="nav-links">
-        <li><a href="#galleri">Galleri</a></li>
-        <li><a href="#om">Om</a></li>
-        <li><a href="#bestil">Bestil portræt</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
-        <li><a href="#kurv" class="cart-btn">Kurv (<span id="cart-count">0</span>)</a></li>
-      </ul>
-      <button class="menu-toggle" aria-label="Menu">
-        <span></span><span></span><span></span>
+
+      <a class="button"
+         href="https://allheartsportraits.dk"
+         target="_blank"
+         rel="noopener">
+         🛒 Visit Webshop
+      </a>
+
+      <button class="button page-link" data-page="digital">
+        Explore Digital Art
       </button>
-    </div>
-  </nav>
 
-  <!-- Hero -->
-  <header class="hero">
-    <div class="hero-content">
-      <img src="logo.webp" alt="" class="hero-logo">
-      <p class="hero-subtitle">Portrætkunst med hjerte</p>
-      <h1>AllHeartsPortraits</h1>
-      <p class="hero-text">Hvert portræt fortæller en historie. Jeg skaber unikke, følsomme portrætter der fanger sjælen – både som originale værker og limited edition prints.</p>
-      <div class="hero-buttons">
-        <a href="#galleri" class="btn btn-primary">Se galleriet</a>
-        <a href="#bestil" class="btn btn-outline">Bestil et portræt</a>
-      </div>
-    </div>
-  </header>
+      <button class="button page-link" data-page="videos">
+        Watch Videos
+      </button>
 
-  <!-- Galleri / Shop -->
-  <section id="galleri" class="gallery-section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Galleri</h2>
-        <p>Udvalgte portrætter – klik for detaljer og køb</p>
-      </div>
+      <button class="button page-link" data-page="paintings">
+        Original Paintings
+      </button>
 
-      <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">Alle</button>
-        <button class="filter-btn" data-filter="original">Originaler</button>
-        <button class="filter-btn" data-filter="print">Prints</button>
-        <button class="filter-btn" data-filter="commission">Bestillingsværker</button>
-      </div>
-
-      <div class="gallery-grid" id="gallery-grid">
-        <!-- Product cards injected by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Om kunstneren -->
-  <section id="om" class="about-section">
-    <div class="container about-grid">
-      <div class="about-image">
-        <img src="logo.webp" alt="AllHeartsPortraits" class="about-logo">
-      </div>
-      <div class="about-content">
-        <h2>Om AllHeartsPortraits</h2>
-        <p class="lead">Jeg skaber portrætter der kommer fra hjertet.</p>
-        <p>Hvert ansigt bærer en historie, en følelse, en stille styrke. Gennem mine værker forsøger jeg at fange det, der ligger bag blikket – den indre verden, den stille skønhed og den menneskelige sårbarhed.</p>
-        <p>Jeg arbejder primært med traditionelle teknikker i sort/hvid og bløde toner, men laver også farvede portrætter efter ønske. Alle originale værker leveres med certifikat, og prints produceres i begrænset oplag på museumskvalitetspapir.</p>
-        <a href="#bestil" class="btn btn-outline">Bestil dit eget portræt</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Bestil portræt -->
-  <section id="bestil" class="commission-section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Bestil et personligt portræt</h2>
-        <p>Få et unikt portræt skabt specielt til dig eller som gave</p>
-      </div>
-      <div class="commission-grid">
-        <div class="commission-card">
-          <div class="commission-number">01</div>
-          <h3>Send foto</h3>
-          <p>Send et klart foto af den person, du ønsker portrætteret. Gerne flere vinkler.</p>
-        </div>
-        <div class="commission-card">
-          <div class="commission-number">02</div>
-          <h3>Vi aftaler stilen</h3>
-          <p>Sort/hvid, sepia, farve, størrelse og teknik. Vi finder den rette udtryk sammen.</p>
-        </div>
-        <div class="commission-card">
-          <div class="commission-number">03</div>
-          <h3>Skabelsen</h3>
-          <p>Jeg arbejder på dit portræt med omhu. Du får opdateringer undervejs.</p>
-        </div>
-        <div class="commission-card">
-          <div class="commission-number">04</div>
-          <h3>Levering</h3>
-          <p>Dit unikke værk sendes sikkert pakket med certifikat og kærlighed.</p>
-        </div>
-      </div>
-      <div class="commission-cta">
-        <a href="#kontakt" class="btn btn-primary">Start din bestilling</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Kontakt -->
-  <section id="kontakt" class="contact-section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Kontakt</h2>
-        <p>Har du spørgsmål, eller vil du bestille et portræt?</p>
-      </div>
-      <form class="contact-form" id="contact-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="name">Navn</label>
-            <input type="text" id="name" name="name" required placeholder="Dit navn">
-          </div>
-          <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" required placeholder="din@email.dk">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="subject">Emne</label>
-          <select id="subject" name="subject">
-            <option value="bestilling">Bestilling af portræt</option>
-            <option value="spørgsmål">Spørgsmål til et værk</option>
-            <option value="andet">Andet</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="message">Besked</label>
-          <textarea id="message" name="message" rows="5" required placeholder="Fortæl mig mere om dit ønske..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Send besked</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Cart Modal -->
-  <div class="cart-modal" id="cart-modal">
-    <div class="cart-content">
-      <div class="cart-header">
-        <h3>Din kurv</h3>
-        <button class="close-cart" id="close-cart">&times;</button>
-      </div>
-      <div class="cart-items" id="cart-items">
-        <p class="empty-cart">Kurven er tom</p>
-      </div>
-      <div class="cart-footer">
-        <div class="cart-total">
-          <span>Total:</span>
-          <strong id="cart-total">0 kr.</strong>
-        </div>
-        <div class="payment-buttons">
-          <button class="btn btn-primary" id="checkout-stripe" disabled>
-            Betal med kort (Stripe)
-          </button>
-          <button class="btn btn-mobilepay" id="checkout-mobilepay" disabled>
-            MobilePay
-          </button>
-        </div>
-        <p class="cart-note">Sikker betaling via Stripe. MobilePay kræver opsætning – se README.</p>
-      </div>
     </div>
   </div>
+</div>
 
-  <!-- Product Modal -->
-  <div class="product-modal" id="product-modal">
-    <div class="product-modal-content">
-      <button class="close-modal" id="close-modal">&times;</button>
-      <div class="product-modal-body" id="product-modal-body">
-        <!-- Filled by JS -->
+<!-- DIGITAL DOWNLOADS PAGE -->
+<div id="digital" class="page">
+  <h2 class="section-title">Digital Downloads</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="images/classical-portrait.jpg" alt="Classical Portrait">
+      <div class="card-content">
+        <h3>Classical Portrait</h3>
+        <p>Digital artwork</p>
+        <div class="price">€5.00</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Classical%20Portrait">Purchase</a>
       </div>
     </div>
+
+    <div class="card">
+      <img src="images/enchanted-forest-profile.jpg" alt="Enchanted Forest Profile">
+      <div class="card-content">
+        <h3>Enchanted Forest Profile</h3>
+        <p>Digital artwork</p>
+        <div class="price">€5.00</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Enchanted%20Forest%20Profile">Purchase</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="images/enchanted-forest-woman.jpg" alt="Enchanted Forest Woman">
+      <div class="card-content">
+        <h3>Enchanted Forest Woman</h3>
+        <p>Digital artwork</p>
+        <div class="price">€5.00</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Enchanted%20Forest%20Woman">Purchase</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="images/forest-stream-i.jpg" alt="Forest Stream I">
+      <div class="card-content">
+        <h3>Forest Stream I</h3>
+        <p>Digital artwork</p>
+        <div class="price">€5.00</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Forest%20Stream%20I">Purchase</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="images/forest-stream-ii.jpg" alt="Forest Stream II">
+      <div class="card-content">
+        <h3>Forest Stream II</h3>
+        <p>Digital artwork</p>
+        <div class="price">€5.00</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Forest%20Stream%20II">Purchase</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="images/gothic-red-portrait.jpg" alt="Gothic Red Portrait">
+      <div class="card-content">
+        <h3>Gothic Red Portrait</h3>
+        <p>Digital artwork</p>
+        <div class="price">€5.00</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Gothic%20Red%20Portrait">Purchase</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="images/gothic-red-profile.jpg" alt="Gothic Red Profile">
+      <div class="card-content">
+        <h3>Gothic Red Profile</h3>
+        <p>Digital artwork</p>
+        <div class="price">€5.00</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Gothic%20Red%20Profile">Purchase</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="images/moon-over-ocean.jpg" alt="Moon Over Ocean">
+      <div class="card-content">
+        <h3>Moon Over Ocean</h3>
+        <p>Digital artwork</p>
+        <div class="price">€5.00</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Moon%20Over%20Ocean">Purchase</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="images/moonlit-woman.jpg" alt="Moonlit Woman">
+      <div class="card-content">
+        <h3>Moonlit Woman</h3>
+        <p>Digital artwork</p>
+        <div class="price">€5.00</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Moonlit%20Woman">Purchase</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="images/sunset-love.jpg" alt="Sunset Love">
+      <div class="card-content">
+        <h3>Sunset Love</h3>
+        <p>Digital artwork</p>
+        <div class="price">€5.00</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Sunset%20Love">Purchase</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="images/white-dress-red.jpg" alt="White Dress Red">
+      <div class="card-content">
+        <h3>White Dress Red</h3>
+        <p>Digital artwork</p>
+        <div class="price">€5.00</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=White%20Dress%20Red">Purchase</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- VIDEOS PAGE -->
+<div id="videos" class="page">
+  <h2 class="section-title">Videos</h2>
+
+  <div class="grid">
+
+    <div class="card video-card">
+      <video controls preload="metadata">
+        <source src="videos/video-1.mp4" type="video/mp4">
+      </video>
+      <div class="card-content"><h3>Video 1</h3></div>
+    </div>
+
+    <div class="card video-card">
+      <video controls preload="metadata">
+        <source src="videos/video-2.mp4" type="video/mp4">
+      </video>
+      <div class="card-content"><h3>Video 2</h3></div>
+    </div>
+
+    <div class="card video-card">
+      <video controls preload="metadata">
+        <source src="videos/video-3.mp4" type="video/mp4">
+      </video>
+      <div class="card-content"><h3>Video 3</h3></div>
+    </div>
+
+    <div class="card video-card">
+      <video controls preload="metadata">
+        <source src="videos/video-4.mp4" type="video/mp4">
+      </video>
+      <div class="card-content"><h3>Video 4</h3></div>
+    </div>
+
+    <div class="card video-card">
+      <video controls preload="metadata">
+        <source src="videos/video-5.mp4" type="video/mp4">
+      </video>
+      <div class="card-content"><h3>Video 5</h3></div>
+    </div>
+
+    <div class="card video-card">
+      <video controls preload="metadata">
+        <source src="videos/video-6.mp4" type="video/mp4">
+      </video>
+      <div class="card-content"><h3>Video 6</h3></div>
+    </div>
+
+    <div class="card video-card">
+      <video controls preload="metadata">
+        <source src="videos/video-7.mp4" type="video/mp4">
+      </video>
+      <div class="card-content"><h3>Video 7</h3></div>
+    </div>
+
+    <div class="card video-card">
+      <video controls preload="metadata">
+        <source src="videos/video-8.mp4" type="video/mp4">
+      </video>
+      <div class="card-content"><h3>Video 8</h3></div>
+    </div>
+
+    <div class="card video-card">
+      <video controls preload="metadata">
+        <source src="videos/video-9.mp4" type="video/mp4">
+      </video>
+      <div class="card-content"><h3>Video 9</h3></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ORIGINAL PAINTINGS PAGE -->
+<div id="paintings" class="page">
+  <h2 class="section-title">Original Paintings</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <img class="painting-image" src="images/painting-50x70.jpg" alt="Original Oil Painting">
+      <div class="card-content">
+        <h3>Original Oil Painting</h3>
+        <p>50 × 70 cm<br>Oil on canvas<br>Unframed</p>
+        <div class="price">€107</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Original%20Painting%2050x70">Contact to Purchase</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="painting-image" src="images/evening-trip.jpg" alt="Evening Trip">
+      <div class="card-content">
+        <h3>Evening Trip</h3>
+        <p>30 × 40 cm</p>
+        <div class="price">€25</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Evening%20Trip">Contact to Purchase</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="painting-image" src="images/summer.jpg" alt="Summer">
+      <div class="card-content">
+        <h3>Summer</h3>
+        <p>30 × 40 cm<br>Oil on canvas</p>
+        <div class="price">€25</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Summer%20Painting">Contact to Purchase</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="painting-image" src="images/snowman-xmas.jpg" alt="Snowman Xmas">
+      <div class="card-content">
+        <h3>Snowman Xmas</h3>
+        <p>90 × 40 cm</p>
+        <div class="price">€107</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Snowman%20Xmas">Contact to Purchase</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="painting-image" src="images/evening-tide.jpg" alt="Evening Tide">
+      <div class="card-content">
+        <h3>Evening Tide</h3>
+        <p>61 × 81 cm<br>Framed</p>
+        <div class="price">€107</div>
+        <a class="button" href="mailto:Allheartsportraits@outlook.dk?subject=Evening%20Tide">Contact to Purchase</a>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <img src="logo.webp" alt="AllHeartsPortraits" class="footer-logo">
-        <p>Portrætkunst med hjerte</p>
-      </div>
-      <div>
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="#galleri">Galleri</a></li>
-          <li><a href="#om">Om</a></li>
-          <li><a href="#bestil">Bestil portræt</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Følg med</h4>
-        <div class="social-links">
-          <a href="#" aria-label="Instagram">Instagram</a>
-          <a href="#" aria-label="Facebook">Facebook</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 AllHeartsPortraits. Alle rettigheder forbeholdes.</p>
-    </div>
-  </footer>
+  <p class="intro" style="margin-top:30px">
+    Shipping costs depend on painting size and destination country.
+    Shipping can be arranged through GLS or UPS.
+    Please contact us for shipping details.
+  </p>
+</div>
 
-  <script src="script.js"></script>
+<!-- ABOUT PAGE -->
+<div id="about" class="page">
+  <h2 class="section-title">About</h2>
+
+  <div class="about-box">
+    <p>
+      All Hearts Portraits is dedicated to creating art with emotion,
+      atmosphere and imagination.
+    </p>
+    <p>
+      From portraits and digital artwork to original oil paintings,
+      every artwork is created with a passion for artistic expression.
+    </p>
+  </div>
+</div>
+
+<!-- CONTACT PAGE -->
+<div id="contact" class="page">
+  <h2 class="section-title">Contact</h2>
+
+  <div class="about-box">
+    <p>Questions about artwork, purchases or commissions?</p>
+    <p>
+      <a class="button" href="mailto:Allheartsportraits@outlook.dk">
+        Email All Hearts Portraits
+      </a>
+    </p>
+    <p>Allheartsportraits@outlook.dk</p>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 All Hearts Portraits</p>
+  <p>Art created with heart and soul</p>
+</footer>
+
+<script>
+function showPage(pageId) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
+
+  document.querySelectorAll(".nav-btn").forEach(button => {
+    button.classList.remove("active");
+  });
+
+  const target = document.getElementById(pageId);
+  if (target) {
+    target.classList.add("active");
+  }
+
+  const activeButton = document.querySelector('.nav-btn[data-page="' + pageId + '"]');
+  if (activeButton) {
+    activeButton.classList.add("active");
+  }
+
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+document.querySelectorAll(".nav-btn, .page-link").forEach(button => {
+  button.addEventListener("click", function() {
+    showPage(this.dataset.page);
+  });
+});
+</script>
+
 </body>
 </html>
